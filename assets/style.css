@@ -1,4 +1,20 @@
-.jumbotron {
-	
+.jumbotron h1 {
+	font-family: 'Passion One', cursive;
+	font-size: 90px;
+	color: white;
 }
 
+.jumbotron {
+	background-color: #ed145b;
+}
+
+
+.table, form, .panel-title, #submit {
+	font-family: 'Lato', sans-serif;
+}
+
+.panel-info>.panel-heading, .btn-color {
+	background-color: #004a80;
+	color: white;
+	border-color: #004a80;
+}

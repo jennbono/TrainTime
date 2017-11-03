@@ -44,11 +44,11 @@ var database = firebase.database();
  		}
  		while (now.diff(nextArrival) >= 0);
 
- 		nextArrival = nextArrival.format("hh:mm A");
- 			
+ 		nextArrivalDisplay = nextArrival.format("hh:mm A");
+ 			console.log(nextArrivalDisplay);
 	
-	var minutesAway = moment().subtract(nextArrival, "hh:mm A").format("mm");
+	var minutesAway = nextArrival.diff(now, "minutes").format("mm");
 
 
- 	$("tbody").append("<tr><td>"+trainName+"</td><td>"+destination+"</td><td>"+frequency+"</td><td>"+nextArrival+"</td><td>"+minutesAway+"</td></tr>")
+ 	$("tbody").append("<tr><td>"+trainName+"</td><td>"+destination+"</td><td>"+frequency+"</td><td>"+nextArrivalDisplay+"</td><td>"+minutesAway+"</td></tr>")
  });

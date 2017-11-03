@@ -12,7 +12,7 @@
 
 var database = firebase.database();
 
-$("#submit").on("click",function(){
+	$("#submit").on("click",function(){
 	var trainName = $("#trainName").val().trim();
 	var destination = $("#destination").val().trim();
 	var trainTime = $("#trainTime").val().trim();
@@ -31,7 +31,24 @@ $("#submit").on("click",function(){
  	var destination = snapshot.val().destination;
  	var trainTime = snapshot.val().trainTime;
  	var frequency = snapshot.val().frequency;
+ 	var now = moment();
+ 	console.log(trainTime);
+ 	
+ 	 
+ 	var nextArrival = moment(trainTime, "HH:mm");
+ 		if (now.diff(nextArrival) <= 0) {
+ 			nextArrival = moment();
+ 		}
+ 		do {
+ 			nextArrival.add(frequency, "m");
+ 		}
+ 		while (now.diff(nextArrival) >= 0);
+
+ 		nextArrival = nextArrival.format("hh:mm A");
+ 			
+	
+	var minutesAway = moment().subtract(nextArrival, "hh:mm A").format("mm");
 
 
- 	$("tbody").append("<tr><td>"+trainName+"</td><td>"+destination+"</td><td>"+frequency+"</td><td>01:30 PM</td><td>10</td></tr>")
+ 	$("tbody").append("<tr><td>"+trainName+"</td><td>"+destination+"</td><td>"+frequency+"</td><td>"+nextArrival+"</td><td>"+minutesAway+"</td></tr>")
  });

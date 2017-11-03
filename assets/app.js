@@ -36,18 +36,17 @@ var database = firebase.database();
  	
  	 
  	var nextArrival = moment(trainTime, "HH:mm");
- 		if (now.diff(nextArrival) <= 0) {
- 			nextArrival = moment();
- 		}
- 		do {
+ 		while (now.diff(nextArrival) > 0) {
+ 			now.diff(nextArrival) < 0;
  			nextArrival.add(frequency, "m");
  		}
- 		while (now.diff(nextArrival) >= 0);
 
  		nextArrivalDisplay = nextArrival.format("hh:mm A");
  			console.log(nextArrivalDisplay);
 	
-	var minutesAway = nextArrival.diff(now, "minutes").format("mm");
+	var minutesAway = nextArrival.diff(now, "m");
+		
+		console.log(minutesAway);
 
 
  	$("tbody").append("<tr><td>"+trainName+"</td><td>"+destination+"</td><td>"+frequency+"</td><td>"+nextArrivalDisplay+"</td><td>"+minutesAway+"</td></tr>")
